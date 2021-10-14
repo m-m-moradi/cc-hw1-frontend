@@ -4,6 +4,7 @@
 
 <script>
 export default {
+  /* eslint-disable vue/component-definition-name-casing */
   name: '_id'
 }
 </script>
