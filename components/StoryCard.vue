@@ -6,12 +6,12 @@
   >
     <v-card-title>
       <span class='header'>
-      <fa :icon="['far', 'user']" size='lg'/>
-        <span style='background-color: darkblue; padding: 3px 5px;color: white; border-radius: 3px'>{{ author }}</span>
+      <fa :icon="['far', 'user']" size='lg' />
+        <span class='author'>{{ author }}</span>
          : {{ capitalTitle }}
       </span>
       <v-spacer></v-spacer>
-      <span class='count pr-4'>
+      <span class=' count pr-4'>
         <fa :icon="['far', 'comment']" />
         {{ commentCount }}
       </span>
@@ -98,6 +98,13 @@ export default {
   font-size: 15px;
   font-weight: 700;
   color: black;
+}
+
+.author {
+  background-color: darkblue;
+  padding: 3px 5px;
+  color: white;
+  border-radius: 3px;
 }
 
 </style>

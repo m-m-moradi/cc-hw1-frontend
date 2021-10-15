@@ -1,7 +1,7 @@
 <template>
   <v-row justify='center' align='center'>
     <v-col cols='12' sm='8' md='6' class='center'>
-      <category-card class='mb-4' to='#' nuxt>
+      <category-card class='mb-4' to='picture/' nuxt>
         <template #title>
           <h2>Pictures</h2>
         </template>
