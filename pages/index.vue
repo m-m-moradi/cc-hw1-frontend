@@ -1,7 +1,7 @@
 <template>
   <v-row justify='center' align='center'>
     <v-col cols='12' sm='8' md='6' class='center'>
-      <category-card class='mb-4'>
+      <category-card class='mb-4' to='#' nuxt>
         <template #title>
           <h2>Pictures</h2>
         </template>
@@ -23,7 +23,7 @@
           </div>
         </template>
       </category-card>
-      <category-card>
+      <category-card to='story/' nuxt>
         <template #title>
           <h2>Stories</h2>
         </template>
@@ -74,7 +74,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 .center {
   right: 50% !important;
   bottom: 50% !important;

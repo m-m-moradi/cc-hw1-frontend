@@ -1,6 +1,9 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
+  server: {
+    port: 7685 // default: 3000
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - cc_hw1_frontend',
@@ -77,7 +80,7 @@ export default {
     component: 'fa',
     icons: {
       solid: true,
-      regular: true,
+      regular: true
     }
   }
 }

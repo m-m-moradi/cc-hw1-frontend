@@ -1,9 +1,8 @@
 <template>
   <v-card
     class='mx-auto'
-    outlined
     elevation='5'
-    max-width='500'
+    v-bind='$attrs'
   >
     <v-card-title>
       <slot name='title'></slot>
