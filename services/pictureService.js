@@ -7,6 +7,9 @@ export default {
   getPicture(id, config={}) {
     return apiClient.get(`/pictures/${id}/`, config)
   },
+  getPicturesCount(config={}){
+    return apiClient.get('/pictures/count/', config)
+  },
   createPicture(data, config={}) {
     return apiClient.post(`/pictures/`, data, config)
   },

@@ -8,7 +8,7 @@
             <v-col>
               <div class='d-flex' style='height: 150px'>
                 <div>
-                  <h1 class='page_title' style='margin-top: 70%'>Stories</h1>
+                  <h1 class='page_title' style='margin-top: 60%'>Pictures</h1>
                 </div>
                 <v-spacer></v-spacer>
                 <div>
@@ -28,6 +28,7 @@
               <picture-card
                 :uploader='picture.uploader'
                 :title='picture.title'
+                :image='picture.image'
                 :comment-count='picture.comments.length'
                 :date='picture.created_at'>
               </picture-card>
@@ -49,6 +50,9 @@ export default {
   name: 'index',
   components: {
     PictureCard
+  },
+  async fetch({ store }) {
+    await store.dispatch('pictureStore/fetchPictures', { config: {} })
   },
   computed: {
     ...mapState({

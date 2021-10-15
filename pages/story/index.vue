@@ -50,6 +50,10 @@ export default {
   components: {
     StoryCard
   },
+  async fetch({ store }) {
+    // todo: many stories and pictures
+    await store.dispatch('storyStore/fetchStories', { config: {} })
+  },
   computed: {
     ...mapState({
       stories: (state) => state.storyStore.stories

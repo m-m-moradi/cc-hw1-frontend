@@ -5,11 +5,10 @@
     v-bind='$attrs'
   >
     <v-card-title>
+      <div class='pr-3'>
+        <slot name='icon'></slot>
+      </div>
       <slot name='title'></slot>
-      <v-spacer></v-spacer>
-      <slot name='icon'>
-        <v-icon>mdi-icon</v-icon>
-      </slot>
     </v-card-title>
     <v-card-subtitle class='pt-2 pb-1'>
       <slot name='subtitle'></slot>

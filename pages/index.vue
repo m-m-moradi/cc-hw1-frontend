@@ -1,12 +1,12 @@
 <template>
   <v-row justify='center' align='center'>
-    <v-col cols='12' sm='8' md='6' class='center'>
+    <v-col cols='12' sm='6' md='4' class='center'>
       <category-card class='mb-4' to='picture/' nuxt>
         <template #title>
           <h2>Pictures</h2>
         </template>
         <template #icon>
-          <fa :icon="['fas', 'image']" size='3x' />
+          <fa :icon="['fas', 'image']" size='2x' />
         </template>
         <template #subtitle>
           <div class='d-flex'>
@@ -17,7 +17,7 @@
             <v-chip label color='green darken-3' small>
               <span class='count'>
                 <fa :icon="['fas', 'hashtag']" />
-                {{ totalPictures }}
+                {{ picturesCount }}
               </span>
             </v-chip>
           </div>
@@ -28,7 +28,7 @@
           <h2>Stories</h2>
         </template>
         <template #icon>
-          <fa :icon="['fas', 'paragraph']" size='3x' />
+          <fa :icon="['fas', 'paragraph']" size='2x' />
         </template>
         <template #subtitle>
           <div class='d-flex'>
@@ -39,7 +39,7 @@
             <v-chip label color='green darken-3' small>
               <span class='count'>
                 <fa :icon="['fas', 'hashtag']" />
-                {{ totalStories }}
+                {{ storiesCount }}
               </span>
             </v-chip>
           </div>
@@ -50,27 +50,21 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import storyService from '@/services/storyService'
+import pictureService from '@/services/pictureService'
 import CategoryCard from '~/components/CategoryCard'
 export default {
   components: {
     CategoryCard
 
   },
-  async fetch({ store }) {
-    // todo: many stories and pictures
-    await store.dispatch('pictureStore/fetchPictures', { config: {} })
-    await store.dispatch('storyStore/fetchStories', { config: {} })
-  },
-  computed: {
-    ...mapState({
-      pictures: (state) => state.pictureStore.pictures,
-      stories: (state) => state.storyStore.stories
-    }),
-    ...mapGetters({
-      totalPictures: 'pictureStore/totalPictures',
-      totalStories: 'storyStore/totalStories'
-    })
+  async asyncData() {
+    const { data: storiesResponse } = await storyService.getStoriesCount()
+    const { data: picturesResponse } = await pictureService.getPicturesCount()
+    return {
+      storiesCount: storiesResponse.count,
+      picturesCount: picturesResponse.count
+    }
   }
 }
 </script>
@@ -84,11 +78,13 @@ export default {
 
 h2 {
   font-family: 'Andada Pro', serif;
+  font-size: 36px;
   font-weight: 700;
 }
 
 .subtitle {
-  font-family: monospace;
+  font-family: 'Andada Pro', serif;
+  font-size: 18px;
   color: black;
 }
 

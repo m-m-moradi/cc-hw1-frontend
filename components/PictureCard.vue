@@ -7,7 +7,7 @@
   >
     <v-img
       width='400'
-      src='https://cdn.vuetifyjs.com/images/cards/cooking.png'
+      :src='image'
     ></v-img>
     <v-list-item three-line>
       <v-list-item-content>
@@ -53,6 +53,10 @@ export default {
     date: {
       type: String,
       required: true
+    },
+    image:{
+      type:String,
+      required: true,
     }
   },
   methods: {

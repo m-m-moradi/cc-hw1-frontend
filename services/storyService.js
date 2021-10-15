@@ -7,6 +7,9 @@ export default {
   getStory(id, config = {}) {
     return apiClient.get(`/stories/${id}/`, config)
   },
+  getStoriesCount(config={}){
+    return apiClient.get('/stories/count/', config)
+  },
   createStory(data, config = {}) {
     return apiClient.post(`/stories/`, data, config)
   },
