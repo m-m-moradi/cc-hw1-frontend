@@ -1,40 +1,30 @@
 <template>
   <v-card
-    class='mb-3'
     elevation='5'
     v-bind='$attrs'
   >
     <v-card-title>
-      <div class='header overflow' style='width: 70%'>
-      <fa :icon="['far', 'user']" size='lg' />
+      <div class='header' style='width: 70%'>
+        <fa :icon="['far', 'user']" size='lg' />
         <span class='author'>{{ author }}</span>
-         : {{ capitalTitle }}
       </div>
       <v-spacer></v-spacer>
-      <span class=' count pr-4'>
-        <fa :icon="['far', 'comment']" />
-        {{ commentCount }}
-      </span>
-      <span class='count'>
+      <span class='date'>
         <fa :icon="['far', 'calendar-alt']" />
         {{ getProperDate(date) }}
       </span>
     </v-card-title>
-    <v-card-subtitle class='pt-2 pb-3 overflow text'>
+    <v-card-text class='pt-2 pb-3 text'>
       {{ text }}
-    </v-card-subtitle>
+    </v-card-text>
   </v-card>
 </template>
 
 <script>
 export default {
-  name: 'StoryCard',
+  name: 'CommentCard',
   props: {
     author: {
-      type: String,
-      required: true
-    },
-    title: {
       type: String,
       required: true
     },
@@ -42,18 +32,9 @@ export default {
       type: String,
       required: true
     },
-    commentCount: {
-      type: [String, Number],
-      required: true
-    },
     date: {
       type: String,
       required: true
-    }
-  },
-  computed: {
-    capitalTitle() {
-      return this.title.charAt(0).toUpperCase() + this.title.slice(1)
     }
   },
   methods: {
@@ -75,11 +56,6 @@ export default {
 </script>
 
 <style scoped>
-.overflow {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
 .header {
   font-family: 'Andada Pro', serif;
@@ -89,11 +65,12 @@ export default {
 
 .text {
   font-family: 'Andada Pro', serif;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 700;
+  color: black;
 }
 
-.count {
+.date {
   font-family: 'Andada Pro', serif;
   font-size: 15px;
   font-weight: 700;
@@ -101,7 +78,7 @@ export default {
 }
 
 .author {
-  background-color: darkblue;
+  background-color: darkred;
   padding: 3px 5px;
   color: white;
   border-radius: 3px;

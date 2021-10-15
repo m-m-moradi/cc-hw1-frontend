@@ -2,11 +2,19 @@
   <v-app dark>
     <v-main>
       <v-container>
-        <Nuxt />
+        <v-row>
+          <v-col></v-col>
+          <v-col cols='10' class='my-0 py-0'>
+            <v-container class='my-0 py-0'>
+              <Nuxt />
+            </v-container>
+          </v-col>
+          <v-col></v-col>
+        </v-row>
       </v-container>
     </v-main>
     <v-footer
-      :absolute="!fixed"
+      :absolute='!fixed'
       app
     >
       <span>&copy; {{ new Date().getFullYear() }}</span>
@@ -16,7 +24,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       clipped: false,
       drawer: false,
@@ -37,6 +45,21 @@ export default {
       right: true,
       rightDrawer: false,
       title: 'Vuetify.js'
+    }
+  },
+  methods: {
+    getProperDate(date) {
+      const tempDate = new Date(date)
+      const options = {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: false
+      }
+      return Intl.DateTimeFormat('en-US', options).format(tempDate)
     }
   }
 }

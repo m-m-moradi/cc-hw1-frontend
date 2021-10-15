@@ -11,7 +11,7 @@
     ></v-img>
     <v-list-item three-line>
       <v-list-item-content>
-        <div class='text-overline mb-4'>
+        <div class=' mb-4'>
           <span class='header'>
             <fa :icon="['far', 'user']" size='lg' />
             <span class='uploader'>{{ uploader }}</span>
@@ -81,7 +81,7 @@ export default {
 
 .header {
   font-family: 'Andada Pro', serif;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 900;
 }
 
