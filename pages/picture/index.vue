@@ -13,7 +13,7 @@
           :uploader='picture.uploader'
           :title='picture.title'
           :image='picture.image'
-          :comment-count='totalPictures'
+          :comment-count='picture.comments.length'
           :date='picture.created_at'
         ></picture-card>
       </v-col>

@@ -6,6 +6,19 @@
           <v-col></v-col>
           <v-col cols='10' class='my-0 py-0'>
             <v-container class='my-0 py-0'>
+              <v-row justify='end'>
+                <div class='d-flex pt-5 pr-5'>
+                  <div style='float: left; padding-top: 20px; padding-right: 10px'>
+                    <fa v-if='$vuetify.theme.dark' :icon='["far", "moon"]' size='lg'/>
+                    <fa v-else :icon='["far", "sun"]' size='lg'/>
+                  </div>
+                  <div style='float: left'>
+                    <v-switch color='grey' @change=toggleTheme()>
+                      Toggle Theme
+                    </v-switch>
+                  </div>
+                </div>
+              </v-row>
               <Nuxt />
             </v-container>
           </v-col>
@@ -47,6 +60,15 @@ export default {
       title: 'Vuetify.js'
     }
   },
+  mounted() {
+    const theme = localStorage.getItem('useDarkTheme')
+    if (theme) {
+      // eslint-disable-next-line eqeqeq
+      if (theme == 'true') {
+        this.$vuetify.theme.dark = true
+      } else this.$vuetify.theme.dark = false
+    }
+  },
   methods: {
     getProperDate(date) {
       const tempDate = new Date(date)
@@ -60,6 +82,10 @@ export default {
         hour12: false
       }
       return Intl.DateTimeFormat('en-US', options).format(tempDate)
+    },
+    toggleTheme() {
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark
+      localStorage.setItem('useDarkTheme', this.$vuetify.theme.dark.toString())
     }
   }
 }

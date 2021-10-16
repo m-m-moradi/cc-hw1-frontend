@@ -82,7 +82,6 @@ export default {
 }
 
 .header {
-  font-family: 'Andada Pro', serif;
   font-size: 18px;
   font-weight: 900;
 }
@@ -97,11 +96,10 @@ export default {
   font-family: 'Andada Pro', serif;
   font-size: 15px;
   font-weight: 700;
-  color: black;
 }
 
 .author {
-  background-color: darkblue;
+  background-color: #2980b9;
   padding: 3px 5px;
   color: white;
   border-radius: 3px;

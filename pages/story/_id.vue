@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col class='my-0 py-0'>
-        <div style='margin-top: 80px'>
+        <div style='margin-top: 40px'>
           <div>
             <v-btn class='button' to='/story' nuxt>
               <fa :icon='["fas", "angle-left"]' />

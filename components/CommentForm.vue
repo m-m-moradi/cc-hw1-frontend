@@ -84,21 +84,18 @@ export default {
   font-family: 'Andada Pro', serif;
   font-size: 16px;
   font-weight: 700;
-  color: black;
 }
 
 ::v-deep .v-textarea textarea {
   font-family: 'Andada Pro', serif;
   font-size: 16px;
   font-weight: 700;
-  color: black;
 }
 
 .v-text-field >>> label {
   font-family: 'Andada Pro', serif;
   font-size: 16px;
   font-weight: 700;
-  color: black;
 }
 
 .v-text-field >>> .error--text {

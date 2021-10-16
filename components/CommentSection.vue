@@ -100,7 +100,7 @@ export default {
         author: data.name,
         text: data.comment,
         object_id: this.entity.id,
-        content_type: contentTypeData.entityType
+        content_type: contentTypeData[this.entityType]
       }
       await this.postComment(comment)
     }

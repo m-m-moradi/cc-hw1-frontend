@@ -14,7 +14,7 @@
              A collection of beautiful pictures.
             </span>
             <v-spacer></v-spacer>
-            <v-chip label color='green darken-3' small>
+            <v-chip label color='lime darken-3' small>
               <span class='count'>
                 <fa :icon="['fas', 'hashtag']" />
                 {{ picturesCount }}
@@ -36,7 +36,7 @@
             A collection of inspiring short stories.
           </span>
             <v-spacer></v-spacer>
-            <v-chip label color='green darken-3' small>
+            <v-chip label color='lime darken-3' small>
               <span class='count'>
                 <fa :icon="['fas', 'hashtag']" />
                 {{ storiesCount }}
@@ -78,7 +78,6 @@ h2 {
 .subtitle {
   font-family: 'Andada Pro', serif;
   font-size: 18px;
-  color: black;
 }
 
 .count {

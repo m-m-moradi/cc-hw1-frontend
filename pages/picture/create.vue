@@ -1,64 +1,76 @@
 <template>
-  <v-card width='600' class='center' elevation='5'>
-    <v-card-title class='px-10 pt-10'>
-      <span class='think mb-3'>Show the world what you see...</span>
-    </v-card-title>
-    <v-card-text class='px-10'>
-      <v-form ref='imageForm'>
-        <div class='d-flex'>
-          <div style='width: 55px;' class='pa-0 ma-0'>
-            <fa :icon='["fas", "user"]' size='3x' />
-          </div>
-          <v-text-field
-            v-model='user'
-            label='Uploader'
-            :rules='nameRules'
-            required
-            outlined
-            clearable
-            dense
-          >
-          </v-text-field>
-        </div>
-        <div class='d-flex'>
-          <div style='width: 55px;' class='pa-0 ma-0'>
-            <fa :icon='["fas", "quote-right"]' size='3x' />
-          </div>
-          <v-text-field
-            v-model='title'
-            label='Title'
-            :rules='titleRules'
-            required
-            outlined
-            clearable
-            dense
-          >
-          </v-text-field>
-        </div>
-        <div class='d-flex'>
-          <div style='width: 55px' class='pa-0 ma-0'>
-            <fa :icon='["fas", "image"]' size='3x' />
-          </div>
-          <v-file-input
-            v-model='image'
-            label='Image'
-            show-size
-            :rules='imageRules'
-            dense
-            outlined
-            accept='image/*'
-            prepend-icon=''
-          >
-          </v-file-input>
-        </div>
-        <div class='d-flex'>
-          <v-spacer></v-spacer>
-          <v-btn class='button' @click='submitForm()'>
-            Submit
-          </v-btn>
-        </div>
-      </v-form>
-    </v-card-text>
+  <div>
+    <div class='center'>
+      <v-btn
+        :to='{name:"picture"}'
+        class='button mb-7'
+        nuxt
+      >
+        <fa :icon='["fas", "angle-left"]' />
+        <span class='pl-3'>Pictures</span>
+      </v-btn>
+      <v-card width='600' elevation='5'>
+        <v-card-title class='px-10 pt-10'>
+          <span class='think mb-3'>Show the world what you see...</span>
+        </v-card-title>
+        <v-card-text class='px-10'>
+          <v-form ref='imageForm'>
+            <div class='d-flex'>
+              <div style='width: 55px;' class='pa-0 ma-0'>
+                <fa :icon='["fas", "user"]' size='3x' />
+              </div>
+              <v-text-field
+                v-model='user'
+                label='Uploader'
+                :rules='nameRules'
+                required
+                outlined
+                clearable
+                dense
+              >
+              </v-text-field>
+            </div>
+            <div class='d-flex'>
+              <div style='width: 55px;' class='pa-0 ma-0'>
+                <fa :icon='["fas", "quote-right"]' size='3x' />
+              </div>
+              <v-text-field
+                v-model='title'
+                label='Title'
+                :rules='titleRules'
+                required
+                outlined
+                clearable
+                dense
+              >
+              </v-text-field>
+            </div>
+            <div class='d-flex'>
+              <div style='width: 55px' class='pa-0 ma-0'>
+                <fa :icon='["fas", "image"]' size='3x' />
+              </div>
+              <v-file-input
+                v-model='image'
+                label='Image'
+                show-size
+                :rules='imageRules'
+                dense
+                outlined
+                accept='image/*'
+                prepend-icon=''
+              >
+              </v-file-input>
+            </div>
+            <div class='d-flex'>
+              <v-spacer></v-spacer>
+              <v-btn class='button' @click='submitForm()'>
+                Submit
+              </v-btn>
+            </div>
+          </v-form>
+        </v-card-text>
+      </v-card>
+    </div>
     <v-snackbar
       v-model='snackbar'
       class='button'
@@ -75,7 +87,7 @@
         </v-btn>
       </template>
     </v-snackbar>
-  </v-card>
+  </div>
 </template>
 
 <script>
@@ -103,7 +115,6 @@ export default {
       return pictureService.createPicture(data, config)
         .then(response => {
           this.submitLoading = false
-          this.snackbar = true
           this.$router.push({ name: 'picture' })
         }).catch(reason => {
           this.submitLoading = false
@@ -128,5 +139,24 @@ export default {
 </script>
 
 <style scoped>
+/* todo: why this styles can not be globalized? */
+/* todo: why this styles does not need important?*/
+.v-text-field >>> input {
+  font-size: 16px;
+  font-weight: 700;
+}
 
+::v-deep .v-textarea textarea {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.v-text-field >>> label {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.v-text-field >>> .error--text {
+  font-weight: 700;
+}
 </style>

@@ -1,13 +1,158 @@
 <template>
-<div></div>
+  <div>
+    <div class='center'>
+      <v-btn
+        :to='{name:"story"}'
+        class='button mb-7'
+        nuxt
+      >
+        <fa :icon='["fas", "angle-left"]' />
+        <span class='pl-3'>Stories</span>
+      </v-btn>
+      <v-card width='600' elevation='5'>
+        <v-card-title class='px-10 pt-10'>
+          <span class='think mb-3'>Share with world what you think...</span>
+        </v-card-title>
+        <v-card-text class='px-10'>
+          <v-form ref='imageForm'>
+            <div class='d-flex'>
+              <div style='width: 55px;' class='pa-0 ma-0'>
+                <fa :icon='["fas", "user"]' size='3x' />
+              </div>
+              <v-text-field
+                v-model='user'
+                label='Author'
+                :rules='nameRules'
+                required
+                outlined
+                clearable
+                dense
+              >
+              </v-text-field>
+            </div>
+            <div class='d-flex'>
+              <div style='width: 55px;' class='pa-0 ma-0'>
+                <fa :icon='["fas", "quote-right"]' size='3x' />
+              </div>
+              <v-text-field
+                v-model='title'
+                label='Title'
+                :rules='titleRules'
+                required
+                outlined
+                clearable
+                dense
+              >
+              </v-text-field>
+            </div>
+            <div class='d-flex'>
+              <div style='width: 55px' class='pa-0 ma-0'>
+                <fa :icon='["fas", "paragraph"]' size='3x' />
+              </div>
+              <v-textarea
+                v-model='story'
+                :rules='storyRules'
+                label='Text'
+                row='4'
+                row-height='30'
+                auto-grow
+                outlined
+              ></v-textarea>
+            </div>
+            <div class='d-flex'>
+              <v-spacer></v-spacer>
+              <v-btn class='button' @click='submitForm()'>
+                Submit
+              </v-btn>
+            </div>
+          </v-form>
+        </v-card-text>
+      </v-card>
+    </div>
+    <v-snackbar
+      v-model='snackbar'
+      class='button'
+    >
+      {{ snackbarMessage }}
+      <template #action='{ attrs }'>
+        <v-btn
+          color='pink'
+          text
+          v-bind='attrs'
+          @click='snackbar = false'
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
+  </div>
 </template>
 
 <script>
+import { nameRules } from '@/validation/nameValidation'
+import { titleRules } from '@/validation/titleValidation'
+import { storyRules } from '@/validation/storyValidation'
+import storyService from '@/services/storyService'
 export default {
-  name: 'StoryCreate'
+  name: 'ServiceCreate',
+  data() {
+    return {
+      title: null,
+      user: null,
+      story: null,
+      snackbar: false,
+      snackbarMessage: null,
+      nameRules,
+      titleRules,
+      storyRules
+    }
+  },
+  methods: {
+    postStory(data, config) {
+      this.submitLoading = true
+      return storyService.createStory(data, config)
+        .then(response => {
+          this.submitLoading = false
+          this.$router.push({ name: 'story' })
+        }).catch(reason => {
+          this.submitLoading = false
+          this.snackbar = true
+          this.snackbarMessage = 'Sorry, there is problem. Please try again.'
+        })
+    },
+    async submitForm() {
+      if (this.$refs.imageForm.validate()) {
+        const data = {
+          author: this.user,
+          title: this.title,
+          text: this.story
+        }
+        await this.postStory(data, {})
+      }
+    }
+  }
 }
 </script>
 
 <style scoped>
+/* todo: why this styles can not be globalized? */
+/* todo: why this styles does not need important?*/
+.v-text-field >>> input {
+  font-size: 16px;
+  font-weight: 700;
+}
 
+::v-deep .v-textarea textarea {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.v-text-field >>> label {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.v-text-field >>> .error--text {
+  font-weight: 700;
+}
 </style>

@@ -29,6 +29,10 @@
 .uploader-name-tag {
   font-weight: 900;
   font-size: 17px;
+  background-color: #16a085;
+  padding: 3px 5px;
+  border-radius: 3px;
+  color: white;
 }
 
 /*Detail Pages*/

@@ -85,23 +85,10 @@ export default {
   font-weight: 900;
 }
 
-.text {
-  font-family: 'Andada Pro', serif;
-  font-size: 14px;
-  font-weight: 500;
-}
-
 .count {
   font-family: 'Andada Pro', serif;
   font-size: 13px;
   font-weight: 700;
-  color: black;
 }
 
-.uploader {
-  background-color: darkgreen;
-  padding: 3px 5px;
-  color: white;
-  border-radius: 3px;
-}
 </style>

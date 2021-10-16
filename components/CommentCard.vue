@@ -67,22 +67,20 @@ export default {
 .text {
   font-family: 'Andada Pro', serif;
   font-size: 16px;
-  font-weight: 700;
-  color: black;
+  font-weight: 500;
 }
 
 .date {
   font-family: 'Andada Pro', serif;
   font-size: 15px;
   font-weight: 700;
-  color: black;
 }
 
 .author {
-  background-color: darkred;
+  background-color: #c0392b;
   padding: 3px 5px;
-  color: white;
   border-radius: 3px;
+  color: white;
 }
 
 </style>
