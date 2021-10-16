@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <v-form ref='form'>
     <v-text-field
       v-model='name'
       :rules='nameRules'
@@ -15,7 +15,17 @@
         </div>
       </template>
     </v-text-field>
-    <v-textarea clearable rows='2' row-height='25' auto-grow outlined>
+    <v-textarea
+      v-model='comment'
+      :rules='textRules'
+      label='Comment'
+      clearable
+      rows='2'
+      row-height='25'
+      required
+      auto-grow
+      outlined
+    >
       <template #prepend>
         <div style='width: 30px' class='pa-0 ma-0'>
           <fa :icon='["far", "comment"]' size='2x'></fa>
@@ -27,35 +37,50 @@
       <v-spacer></v-spacer>
       <v-btn
         class='mr-4 button'
+        :loading='loading'
         @click='submit'
       >
         Submit
       </v-btn>
     </div>
-  </form>
+  </v-form>
 </template>
 
 <script>
 export default {
   name: 'CommentForm',
+  props: {
+    loading: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       name: null,
-      text: null,
+      comment: null,
       nameRules: [
+        (input) => Boolean(input) || 'Name is required',
         (input) => (input || '').length <= 50 || `A maximum of 100 characters is allowed`,
         (input) =>
           /^([A-Za-z0-9]|\s|(-|_))+$/.test(input || '') ||
+          'only English, number, dash, underscore'
+      ],
+      textRules: [
+        (input) => Boolean(input) || 'Text for the comment in required',
+        (input) =>
+          /^([A-Za-z0-9?><;,{}[\]\-_+=!@#$%^&*|']|\s|(-|_))+$/.test(input || '') ||
           'only English, number, dash, underscore'
       ]
     }
   },
   methods: {
     submit() {
-      console.log({
-        name: this.name,
-        text: this.text
-      })
+      this.$emit('submit', { name: this.name, comment: this.comment })
+      console.log(this.$refs)
+      this.comment = null
+      this.name = null
+      this.$refs.form.resetValidation()
     }
   }
 }
@@ -84,7 +109,7 @@ export default {
   color: black;
 }
 
-.v-text-field >>>  {
+.v-text-field >>> {
   font-size: 0.8em;
 }
 

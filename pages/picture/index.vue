@@ -1,47 +1,36 @@
 <template>
   <v-container>
+    <list-page-header
+      title='Pictures'
+      :total-items='totalPictures'
+      button-text='Upload New Picture'
+    ></list-page-header>
     <v-row>
-      <v-col>
-        <div class='d-flex' style='height: 150px'>
-          <div>
-            <h1 class='page_title' style='margin-top: 60%'>Pictures</h1>
-          </div>
-          <v-spacer></v-spacer>
-          <div>
-            <v-btn style='margin-top:70% ' elevation='5' class='button'>
-              Upload New Picture
-            </v-btn>
-          </div>
-        </div>
-        <div>
-          <fa :icon='["fas", "hashtag"]' />
-          <span class='total'>picture: {{ totalPictures }}</span>
-        </div>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col v-for='picture in pictures' :key='picture.id' cols='4' >
+      <v-col v-for='picture in pictures' :key='picture.id' cols='4' class='pb-3'>
         <picture-card
+          :to="{ name: 'picture-id', params: { id: picture.id }}" nuxt
           :uploader='picture.uploader'
           :title='picture.title'
           :image='picture.image'
           :comment-count='picture.comments.length'
-          :date='picture.created_at'>
-        </picture-card>
+          :date='picture.created_at'
+        ></picture-card>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
-
 <script>
 import { mapGetters, mapState } from 'vuex'
 import PictureCard from '@/components/PictureCard'
+import ListPageHeader from '@/components/ListPageHeader'
+
 export default {
   /* eslint-disable vue/component-definition-name-casing */
-  name: 'index',
+  name: 'PictureList',
   components: {
-    PictureCard
+    PictureCard,
+    ListPageHeader
   },
   async fetch({ store }) {
     await store.dispatch('pictureStore/fetchPictures', { config: {} })
@@ -58,23 +47,5 @@ export default {
 </script>
 
 <style scoped>
-.page_title {
-  font-family: 'Andada Pro', serif;
-  font-weight: 900;
-  font-size: 42px;
-}
-
-.button {
-  font-family: 'Andada Pro', serif;
-  text-transform: unset !important;
-  font-weight: 600;
-  font-size: 16px;
-}
-
-.total {
-  font-family: 'Andada Pro', serif;
-  font-weight: 800;
-  font-size: 20px;
-}
 </style>
 

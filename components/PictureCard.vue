@@ -14,7 +14,7 @@
         <div class=' mb-4'>
           <span class='header'>
             <fa :icon="['far', 'user']" size='lg' />
-            <span class='uploader'>{{ uploader }}</span>
+            <span class='uploader-name-tag'>{{ uploader }}</span>
           </span>
         </div>
         <div class='d-flex'>
