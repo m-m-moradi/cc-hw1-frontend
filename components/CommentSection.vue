@@ -61,7 +61,7 @@ export default {
   name: 'CommentSection',
   props: {
     loading: {
-      type: String,
+      type: Boolean,
       required: true
     },
     entity: {

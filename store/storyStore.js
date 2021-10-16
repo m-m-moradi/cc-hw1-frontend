@@ -1,6 +1,7 @@
 import storyService from '~/services/storyService'
 export const state = () => ({
   stories: [],
+  totalStories: null,
   createPending: false
 })
 
@@ -10,13 +11,13 @@ export const mutations = {
   },
   SET_CREATE_PENDING(state, status) {
     state.status = status
-  }
+  },
+  SET_TOTAL_STORIES(state, num){
+    state.totalStories = num
+  },
 }
 
 export const getters = {
-  totalStories(state) {
-    return state.stories.length
-  },
   getStoryById: (state) => (id) => {
     return state.stories.find((story) => story.id === id)
   }
@@ -25,7 +26,8 @@ export const getters = {
 export const actions = {
   fetchStories({ commit }, { config }) {
     return storyService.getStories(config).then(response => {
-      commit('SET_STORIES', response.data)
+      commit('SET_STORIES', response.data.results)
+      commit('SET_TOTAL_STORIES', response.data.count)
       return response
     })
   },

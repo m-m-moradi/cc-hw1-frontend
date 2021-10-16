@@ -2,6 +2,13 @@
   font-family: 'Andada Pro', serif;
 }
 
+.center {
+  right: 50% !important;
+  bottom: 50% !important;
+  transform: translate(50%, 50%) !important;
+  position: absolute !important;
+}
+
 /*List pages*/
 .page_title {
   font-weight: 900;

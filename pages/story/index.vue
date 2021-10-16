@@ -4,6 +4,7 @@
       title='Stories'
       :total-items='totalStories'
       button-text='Create New Story'
+      create-button-link='story-create'
     ></list-page-header>
     <v-row>
       <v-col v-for='story in stories' :key='story.id' cols='12' class='pb-1'>
@@ -17,11 +18,23 @@
         ></story-card>
       </v-col>
     </v-row>
+    <v-row justify='center' class='mb-3'>
+      <v-col>
+        <v-pagination
+          v-model='pageNumber'
+          :length='totalPages'
+          :total-visible='7'
+          class='button'
+          color='grey'
+          @input='num => fetchStories({config: {params: {page: num}}})'
+        ></v-pagination>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import StoryCard from '@/components/StoryCard'
 import ListPageHeader from '@/components/ListPageHeader'
 
@@ -32,16 +45,26 @@ export default {
     StoryCard,
     ListPageHeader
   },
+  data() {
+    return {
+      pageNumber: 1
+    }
+  },
   async fetch({ store }) {
-    // todo: many stories and pictures
     await store.dispatch('storyStore/fetchStories', { config: {} })
   },
   computed: {
     ...mapState({
-      stories: (state) => state.storyStore.stories
+      stories: (state) => state.storyStore.stories,
+      totalStories: (state) => state.storyStore.totalStories
     }),
-    ...mapGetters({
-      totalStories: 'storyStore/totalStories'
+    totalPages() {
+      return Math.ceil(this.totalStories / 15)
+    }
+  },
+  methods: {
+    ...mapActions({
+      fetchStories: 'storyStore/fetchStories'
     })
   }
 }

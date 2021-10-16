@@ -49,7 +49,7 @@ export default {
   },
   async asyncData({ error, params }) {
     try {
-      const { data } = await storyService.getPicture(params.id)
+      const { data } = await storyService.getStory(params.id)
       return {
         story: data
       }

@@ -17,7 +17,7 @@
     </v-text-field>
     <v-textarea
       v-model='comment'
-      :rules='textRules'
+      :rules='commentRules'
       label='Comment'
       clearable
       rows='2'
@@ -47,6 +47,8 @@
 </template>
 
 <script>
+import { commentRules } from '@/validation/commentValidation'
+import { nameRules } from '@/validation/nameValidation'
 export default {
   name: 'CommentForm',
   props: {
@@ -59,28 +61,18 @@ export default {
     return {
       name: null,
       comment: null,
-      nameRules: [
-        (input) => Boolean(input) || 'Name is required',
-        (input) => (input || '').length <= 50 || `A maximum of 100 characters is allowed`,
-        (input) =>
-          /^([A-Za-z0-9]|\s|(-|_))+$/.test(input || '') ||
-          'only English, number, dash, underscore'
-      ],
-      textRules: [
-        (input) => Boolean(input) || 'Text for the comment in required',
-        (input) =>
-          /^([A-Za-z0-9?><;,{}[\]\-_+=!@#$%^&*|']|\s|(-|_))+$/.test(input || '') ||
-          'only English, number, dash, underscore'
-      ]
+      commentRules,
+      nameRules
     }
   },
   methods: {
     submit() {
-      this.$emit('submit', { name: this.name, comment: this.comment })
-      console.log(this.$refs)
-      this.comment = null
-      this.name = null
-      this.$refs.form.resetValidation()
+      if (this.$refs.form.validate()) {
+        this.$emit('submit', { name: this.name, comment: this.comment })
+        this.comment = null
+        this.name = null
+        this.$refs.form.resetValidation()
+      }
     }
   }
 }
@@ -107,10 +99,6 @@ export default {
   font-size: 16px;
   font-weight: 700;
   color: black;
-}
-
-.v-text-field >>> {
-  font-size: 0.8em;
 }
 
 .v-text-field >>> .error--text {

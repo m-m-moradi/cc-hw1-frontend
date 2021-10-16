@@ -16,7 +16,13 @@
         </div>
         <v-spacer></v-spacer>
         <div>
-          <v-btn style='margin-top: 30px' elevation='5' class='button'>
+          <v-btn
+            style='margin-top: 30px'
+            elevation='5'
+            class='button'
+            :to='{name: createButtonLink}'
+            nuxt
+          >
             {{ buttonText }}
           </v-btn>
         </div>
@@ -42,8 +48,12 @@ export default {
       required: true
     },
     totalItems: {
-      type: String,
+      type: [String, Number],
       required: true
+    },
+    createButtonLink: {
+      type: String,
+      required: true,
     }
   }
 }

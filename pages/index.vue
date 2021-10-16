@@ -69,13 +69,6 @@ export default {
 }
 </script>
 <style scoped>
-.center {
-  right: 50% !important;
-  bottom: 50% !important;
-  transform: translate(50%, 50%) !important;
-  position: absolute !important;
-}
-
 h2 {
   font-family: 'Andada Pro', serif;
   font-size: 36px;

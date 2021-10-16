@@ -1,5 +1,6 @@
 <template>
   <v-card
+    class='mb-1 mx-auto'
     elevation='5'
     v-bind='$attrs'
   >
