@@ -15,5 +15,8 @@ export default {
   },
   getContentType(config={}){
     return apiClient.get('/content_type/', config)
-  }
+  },
+  getAudio(id, config={}){
+    return apiClient.get(`/comments/${id}/audio/`, config)
+  },
 }

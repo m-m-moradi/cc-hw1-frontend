@@ -20,6 +20,7 @@
         <div v-if='entity.comments.length > 0'>
           <comment-card
             v-for='comment in entity.comments'
+            :id='comment.id'
             :key='comment.id'
             :author='comment.author'
             :text='comment.text'
@@ -77,7 +78,8 @@ export default {
   data() {
     return {
       snackbar: false,
-      snackbarMessage: null
+      snackbarMessage: null,
+      audiosStatus: []
     }
   },
   methods: {
