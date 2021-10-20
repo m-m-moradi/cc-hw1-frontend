@@ -35,7 +35,7 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import StoryCard from '@/components/StoryCard'
+import StoryCard from '@/components/story/StoryCard'
 import ListPageHeader from '@/components/ListPageHeader'
 
 export default {

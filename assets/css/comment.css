@@ -5,7 +5,7 @@
 
 .comment-text {
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .comment-detail-info {
@@ -14,6 +14,7 @@
 }
 
 .comment-author-name-tag {
+  background-color: #c0392b;
   padding: 3px 5px;
   border-radius: 3px;
   color: white;

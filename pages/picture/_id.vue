@@ -36,7 +36,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import CommentSection from '@/components/CommentSection'
+import CommentSection from '@/components/comment/CommentSection'
 export default {
   name: 'PictureDetail',
   components: {

@@ -49,8 +49,8 @@
         </v-btn>
       </span>
     </v-card-title>
-    <v-card-text class='pt-2 pb-3 comment-text'>
-      {{ text }}
+    <v-card-text class='pt-2 pb-3'>
+      <p class='comment-text'>{{ text }}</p>
       <div v-if='audioSource'>
         <v-divider class='my-3'></v-divider>
         <vue-plyr

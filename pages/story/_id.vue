@@ -88,7 +88,7 @@
 /* eslint-disable vue/component-definition-name-casing */
 import { mapState, mapActions } from 'vuex'
 import storyService from '@/services/storyService'
-import CommentSection from '@/components/CommentSection'
+import CommentSection from '@/components/comment/CommentSection'
 export default {
   name: 'StoryDetail',
   components: {
