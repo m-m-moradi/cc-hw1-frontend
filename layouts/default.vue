@@ -70,19 +70,6 @@ export default {
     }
   },
   methods: {
-    getProperDate(date) {
-      const tempDate = new Date(date)
-      const options = {
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric',
-        hour12: false
-      }
-      return Intl.DateTimeFormat('en-US', options).format(tempDate)
-    },
     toggleTheme() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark
       localStorage.setItem('useDarkTheme', this.$vuetify.theme.dark.toString())

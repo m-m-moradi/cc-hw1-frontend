@@ -20,7 +20,7 @@
           </div>
           <div>
             <fa :icon="['far', 'calendar-alt']" />
-            <span class='detail-date'>{{ getProperDate(picture.created_at) }}</span>
+            <span class='detail-date'>{{ $getProperDate(picture.created_at) }}</span>
           </div>
         </div>
         <v-img :src='picture.image' style='border-radius: 3px'></v-img>
@@ -35,7 +35,6 @@
 </template>
 
 <script>
-/* eslint-disable vue/component-definition-name-casing */
 import { mapState } from 'vuex'
 import CommentSection from '@/components/CommentSection'
 export default {
@@ -55,22 +54,7 @@ export default {
       commentCreateLoading: (state) => state.commentStore.createPending
     })
   },
-  methods: {
-    getProperDate(date) {
-      const tempDate = new Date(date)
-      const options = {
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric',
-        hour12: false
-      }
-      return Intl.DateTimeFormat('en-US', options).format(tempDate)
-    }
-
-  }
+  methods: {}
 }
 </script>
 

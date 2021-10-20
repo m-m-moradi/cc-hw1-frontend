@@ -25,7 +25,7 @@
           <v-spacer></v-spacer>
           <div class='count'>
             <fa :icon="['far', 'calendar-alt']" />
-            {{ getProperDate(date) }}
+            {{ $getProperDate(date) }}
           </div>
         </div>
       </v-list-item-content>
@@ -54,26 +54,12 @@ export default {
       type: String,
       required: true
     },
-    image:{
-      type:String,
-      required: true,
+    image: {
+      type: String,
+      required: true
     }
   },
-  methods: {
-    getProperDate(date) {
-      const tempDate = new Date(date)
-      const options = {
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric',
-        hour12: false
-      }
-      return Intl.DateTimeFormat('en-US', options).format(tempDate)
-    }
-  }
+  methods: {}
 }
 </script>
 

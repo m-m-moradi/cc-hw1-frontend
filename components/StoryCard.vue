@@ -17,7 +17,7 @@
       </span>
       <span class='count'>
         <fa :icon="['far', 'calendar-alt']" />
-        {{ getProperDate(date) }}
+        {{ $getProperDate(date) }}
       </span>
     </v-card-title>
     <v-card-subtitle class='pt-2 pb-3 overflow text'>
@@ -56,21 +56,7 @@ export default {
       return this.title.charAt(0).toUpperCase() + this.title.slice(1)
     }
   },
-  methods: {
-    getProperDate(date) {
-      const tempDate = new Date(date)
-      const options = {
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric',
-        hour12: false
-      }
-      return Intl.DateTimeFormat('en-US', options).format(tempDate)
-    }
-  }
+  methods: {}
 }
 </script>
 

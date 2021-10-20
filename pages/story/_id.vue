@@ -15,7 +15,7 @@
         <div class='d-flex mb-1'>
           <v-spacer></v-spacer>
           <span>
-            <template v-if='isEmpty(story.sentiment) || isNothing(story.sentiment)'>
+            <template v-if='$isEmpty(story.sentiment) || $isNothing(story.sentiment)'>
               <v-btn
                 icon
                 small
@@ -29,7 +29,7 @@
               </v-btn>
             </template>
             <template v-else>
-              <fa style='font-size: 18px;' :icon='emoji(story.sentiment.sentiment.document.score)' />
+              <fa style='font-size: 18px;' :icon='$emoji(story.sentiment.sentiment.document.score)' />
               <span class='detail-date pr-1'> {{ story.sentiment.sentiment.document.label.toLocaleUpperCase() }} </span>
               <span class='detail-date pr-1'> {{ story.sentiment.language.toUpperCase() }} </span>
             </template>
@@ -40,7 +40,7 @@
           </div>
           <div>
             <fa :icon="['far', 'calendar-alt']" />
-            <span class='detail-date'>{{ getProperDate(story.created_at) }}</span>
+            <span class='detail-date'>{{ $getProperDate(story.created_at) }}</span>
           </div>
           <v-btn
             icon
@@ -97,7 +97,24 @@ export default {
   data() {
     return {
       audioLoading: false,
-      audioSource: false
+      audioSource: false,
+      // custom player css
+      darkPlyrMode:{
+        '--plyr-color-main': '#c0392b',
+        '--plyr-menu-background': 'white',
+        '--plyr-control-spacing': '5px',
+        '--plyr-audio-control-color': 'white',
+        '--plyr-audio-controls-background': '#121212',
+        '--plyr-control-icon-size': '15px'
+      },
+      whitePlyrMode: {
+        '--plyr-color-main': '#c0392b',
+        '--plyr-menu-background': 'white',
+        '--plyr-control-spacing': '5px',
+        '--plyr-audio-control-color': 'black',
+        '--plyr-audio-controls-background': 'white',
+        '--plyr-control-icon-size': '15px'
+      }
     }
   },
   async fetch({ store, params }) {
@@ -112,45 +129,12 @@ export default {
     vuetifyDarkMode() {
       return this.$vuetify.theme.dark
     },
-    darkPlyrMode() {
-      return {
-        '--plyr-color-main': '#c0392b',
-        '--plyr-menu-background': 'white',
-        '--plyr-control-spacing': '5px',
-        '--plyr-audio-control-color': 'white',
-        '--plyr-audio-controls-background': '#121212',
-        '--plyr-control-icon-size': '15px'
-      }
-    },
-    whitePlyrMode() {
-      return {
-        '--plyr-color-main': '#c0392b',
-        '--plyr-menu-background': 'white',
-        '--plyr-control-spacing': '5px',
-        '--plyr-audio-control-color': 'black',
-        '--plyr-audio-controls-background': 'white',
-        '--plyr-control-icon-size': '15px'
-      }
-    }
   },
   methods: {
     ...mapActions({
       getStorySentiment: 'storyStore/fetchSentiment'
     }),
-    isEmpty(obj) {
-      return Object.keys(obj).length === 0
-    },
-    isNothing(thing) {
-      return thing === null || typeof thing === 'undefined'
-    },
-    emoji(score) {
-      if (score > 0.1)
-        return ['far', 'smile-beam']
-      else if (score <= 0.1 && score >= -0.1)
-        return ['far', 'meh']
-      else
-        return ['far', 'angry']
-    },
+
     getAudio(id) {
       if (!this.audioSource) {
         this.audioLoading = true
@@ -165,19 +149,6 @@ export default {
         this.audioSource = null
       }
     },
-    getProperDate(date) {
-      const tempDate = new Date(date)
-      const options = {
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric',
-        hour12: false
-      }
-      return Intl.DateTimeFormat('en-US', options).format(tempDate)
-    }
   }
 }
 </script>

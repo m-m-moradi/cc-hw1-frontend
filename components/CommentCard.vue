@@ -11,7 +11,7 @@
       </div>
       <v-spacer></v-spacer>
       <span>
-        <template v-if='isEmpty(sentiment) || isNothing(sentiment)'>
+        <template v-if='$isEmpty(sentiment) || $isNothing(sentiment)'>
           <v-btn
             icon
             small
@@ -25,14 +25,14 @@
           </v-btn>
         </template>
         <template v-else>
-          <fa style='font-size: 18px;' :icon='emoji(sentiment.sentiment.document.score)' />
-          <span class='date pr-1'> {{ capitalizeFirstLetter(sentiment.sentiment.document.label) }} </span>
+          <fa style='font-size: 18px;' :icon='$emoji(sentiment.sentiment.document.score)' />
+          <span class='date pr-1'> {{ $capitalizeFirstLetter(sentiment.sentiment.document.label) }} </span>
           <span class='date pr-1'> {{ sentiment.language.toUpperCase() }} </span>
         </template>
       </span>
       <span class='date pl-2'>
         <fa :icon="['far', 'calendar-alt']" />
-        {{ getProperDate(date) }}
+        {{ $getProperDate(date) }}
       </span>
       <span>
         <v-btn
@@ -134,14 +134,6 @@ export default {
     ...mapActions({
       getCommentSentiment: 'commentStore/fetchSentiment'
     }),
-    emoji(score) {
-      if (score > 0.1)
-        return ['far', 'smile-beam']
-      else if (score <= 0.1 && score >= -0.1)
-        return ['far', 'meh']
-      else
-        return ['far', 'angry']
-    },
     getAudio(id) {
       if (!this.audioSource) {
         this.audioLoading = true
@@ -157,28 +149,6 @@ export default {
         this.audioSource = null
       }
     },
-    getProperDate(date) {
-      const tempDate = new Date(date)
-      const options = {
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric',
-        hour12: false
-      }
-      return Intl.DateTimeFormat('en-US', options).format(tempDate)
-    },
-    isEmpty(obj) {
-      return Object.keys(obj).length === 0
-    },
-    isNothing(thing) {
-      return thing === null || typeof thing === 'undefined'
-    },
-    capitalizeFirstLetter(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1)
-    }
   }
 }
 </script>
