@@ -5,27 +5,47 @@
     v-bind='$attrs'
   >
     <v-card-title>
-      <div class='header' style='width: 70%'>
+      <div class='header' style='width: 30%'>
         <fa :icon="['far', 'user']" size='lg' />
         <span class='author'>{{ author }}</span>
       </div>
       <v-spacer></v-spacer>
       <span>
+        <template v-if='isEmpty(sentiment) || isNothing(sentiment)'>
+          <v-btn
+            icon
+            small
+            class='pb-1'
+            :loading='sentimentLoading'
+            @click='getCommentSentiment({id: id, config: {}})'>
+            <template #loader>
+              <fa :icon="['fas', 'circle-notch']" size='lg' spin />
+            </template>
+            <fa :icon="['far', 'question-circle']" size='lg' />
+          </v-btn>
+        </template>
+        <template v-else>
+          <fa style='font-size: 18px;' :icon='emoji(sentiment.sentiment.document.score)' />
+          <span class='date pr-1'> {{ capitalizeFirstLetter(sentiment.sentiment.document.label) }} </span>
+          <span class='date pr-1'> {{ sentiment.language.toUpperCase() }} </span>
+        </template>
+      </span>
+      <span class='date pl-2'>
+        <fa :icon="['far', 'calendar-alt']" />
+        {{ getProperDate(date) }}
+      </span>
+      <span>
         <v-btn
           icon
           small
-          class='pb-1 mr-2'
-          :loading='loading'
+          class='pb-1 ml-2'
+          :loading='audioLoading'
           @click='getAudio(id)'>
           <template #loader>
             <fa :icon="['fas', 'circle-notch']" size='lg' spin />
           </template>
           <fa :icon="['fas', 'headphones-alt']" size='lg' />
         </v-btn>
-      </span>
-      <span class='date'>
-        <fa :icon="['far', 'calendar-alt']" />
-        {{ getProperDate(date) }}
       </span>
     </v-card-title>
     <v-card-text class='pt-2 pb-3 text'>
@@ -49,7 +69,8 @@
 </template>
 
 <script>
-import commentService from '@/services/CommentService'
+import { mapState, mapActions } from 'vuex'
+import commentService from '@/services/commentService'
 export default {
   name: 'CommentCard',
   props: {
@@ -65,6 +86,10 @@ export default {
       type: String,
       required: true
     },
+    sentiment: {
+      type: Object,
+      required: true
+    },
     date: {
       type: String,
       required: true
@@ -72,11 +97,15 @@ export default {
   },
   data() {
     return {
-      loading: false,
-      audioSource: false
+      sentimentData: {},
+      audioLoading: false,
+      audioSource: null
     }
   },
   computed: {
+    ...mapState({
+      sentimentLoading: (state) => state.commentStore.sentimentPending
+    }),
     vuetifyDarkMode() {
       return this.$vuetify.theme.dark
     },
@@ -102,15 +131,27 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      getCommentSentiment: 'commentStore/fetchSentiment'
+    }),
+    emoji(score) {
+      if (score > 0.1)
+        return ['far', 'smile-beam']
+      else if (score <= 0.1 && score >= -0.1)
+        return ['far', 'meh']
+      else
+        return ['far', 'angry']
+    },
     getAudio(id) {
       if (!this.audioSource) {
-        this.loading = true
+        this.audioLoading = true
         return commentService.getAudio(id, {})
           .then(response => {
             this.audioSource = response.data.audio
-            this.loading = false
           }).catch(reason => {
             console.log(reason)
+          }).finally(() => {
+            this.audioLoading = false
           })
       } else {
         this.audioSource = null
@@ -128,6 +169,15 @@ export default {
         hour12: false
       }
       return Intl.DateTimeFormat('en-US', options).format(tempDate)
+    },
+    isEmpty(obj) {
+      return Object.keys(obj).length === 0
+    },
+    isNothing(thing) {
+      return thing === null || typeof thing === 'undefined'
+    },
+    capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1)
     }
   }
 }

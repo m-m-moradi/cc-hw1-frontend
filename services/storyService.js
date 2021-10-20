@@ -15,5 +15,15 @@ export default {
   },
   deleteStory(id, config = {}) {
     return apiClient.delete(`/stories/${id}/`, config)
+  },
+  getAudio(id, config={}){
+    return apiClient.get(`/stories/${id}/audio/`, config)
+  },
+  getSentiment(id, config={}){
+    return apiClient.get(`/stories/${id}/sentiment`, config)
+  },
+  getComments(id, config={}){
+    return apiClient.get(`/stories/${id}/comments`, config)
   }
+
 }

@@ -41,7 +41,7 @@
   font-size: 42px;
 }
 
-.detail_comments, .detail_date {
+.detail-comments, .detail-date {
   text-transform: unset !important;
   font-weight: 600;
   font-size: 16px;
@@ -62,4 +62,8 @@
 .think {
   font-weight: 800;
   font-size: 30px;
+}
+
+.theme--light.v-btn.v-btn--icon {
+    color: rgba(0, 0, 0, 1) !important;
 }

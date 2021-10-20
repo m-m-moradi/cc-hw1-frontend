@@ -19,11 +19,12 @@
       <v-col cols='12'>
         <div v-if='entity.comments.length > 0'>
           <comment-card
-            v-for='comment in entity.comments'
+            v-for='comment in comments'
             :id='comment.id'
             :key='comment.id'
             :author='comment.author'
             :text='comment.text'
+            :sentiment='comment.sentiment'
             :date='comment.created_at'
           ></comment-card>
         </div>
@@ -57,7 +58,8 @@
 </template>
 
 <script>
-import commentService from '@/services/CommentService'
+import { mapState, mapActions } from 'vuex'
+import commentService from '@/services/commentService'
 export default {
   name: 'CommentSection',
   props: {
@@ -78,24 +80,28 @@ export default {
   data() {
     return {
       snackbar: false,
-      snackbarMessage: null,
-      audiosStatus: []
+      snackbarMessage: null
     }
   },
+  // todo : why this is not working
+  // async fetch({ store, params }) {
+  //   console.log(params)
+  //   if (this.entityType === 'picture') {
+  //     await store.dispatch('commentStore/fetchPictureComments', { id: this.entity.id, config: {} })
+  //   } else if (this.entityType === 'story') {
+  //     await store.dispatch('commentStore/fetchStoryComments', { id: this.entity.id, config: {} })
+  //   }
+  // },
+  computed: {
+    ...mapState({
+      comments: (state) => state.commentStore.currentComments,
+      submitLoading: (state) => state.commentStore.createPending
+    })
+  },
   methods: {
-    postComment(data) {
-      this.submitLoading = true
-      return commentService.createComment(data, {})
-        .then(response => {
-          this.submitLoading = false
-          this.snackbar = true
-          this.snackbarMessage = 'We received your message, working on it.'
-        }).catch(reason => {
-          this.submitLoading = false
-          this.snackbar = true
-          this.snackbarMessage = 'Sorry, there is problem. Please try again.'
-        })
-    },
+    ...mapActions({
+      createComment: 'commentStore/createComment'
+    }),
     async submitComment(data) {
       const { data: contentTypeData } = await commentService.getContentType()
       const comment = {
@@ -104,7 +110,14 @@ export default {
         object_id: this.entity.id,
         content_type: contentTypeData[this.entityType]
       }
-      await this.postComment(comment)
+      await this.createComment({ data: comment, config: {} })
+        .then(response => {
+          this.snackbar = true
+          this.snackbarMessage = 'We received your message, working on it.'
+        }).catch(reason => {
+          this.snackbar = true
+          this.snackbarMessage = 'Sorry, there is problem. Please try again.'
+        })
     }
   }
 }

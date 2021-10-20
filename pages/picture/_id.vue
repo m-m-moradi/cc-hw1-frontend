@@ -16,18 +16,18 @@
           <v-spacer></v-spacer>
           <div class='pr-5'>
             <fa :icon="['far', 'comment']" />
-            <span class='detail_comments'>{{ picture.comments.length }}</span>
+            <span class='detail-comments'>{{ picture.comments.length }}</span>
           </div>
           <div>
             <fa :icon="['far', 'calendar-alt']" />
-            <span class='detail_date'>{{ getProperDate(picture.created_at) }}</span>
+            <span class='detail-date'>{{ getProperDate(picture.created_at) }}</span>
           </div>
         </div>
         <v-img :src='picture.image' style='border-radius: 3px'></v-img>
       </v-col>
     </v-row>
     <comment-section
-      :loading='submitLoading'
+      :loading='commentCreateLoading'
       :entity='picture'
       entity-type='picture'
     ></comment-section>
@@ -36,30 +36,24 @@
 
 <script>
 /* eslint-disable vue/component-definition-name-casing */
-import pictureService from '@/services/pictureService'
+import { mapState } from 'vuex'
 import CommentSection from '@/components/CommentSection'
 export default {
   name: 'PictureDetail',
   components: {
     CommentSection
   },
-  async asyncData({ error, params }) {
-    try {
-      const { data } = await pictureService.getPicture(params.id)
-      return {
-        picture: data
-      }
-    } catch (e) {
-      error({
-        statusCode: 503,
-        message: e
-      })
-    }
-  },
   data() {
-    return {
-      submitLoading: false
-    }
+    return {}
+  },
+  async fetch({ store, params }) {
+    await store.dispatch('pictureStore/fetchPicture', { id: params.id, config: {} })
+  },
+  computed: {
+    ...mapState({
+      picture: (state) => state.pictureStore.currentPicture,
+      commentCreateLoading: (state) => state.commentStore.createPending
+    })
   },
   methods: {
     getProperDate(date) {

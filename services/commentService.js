@@ -19,4 +19,7 @@ export default {
   getAudio(id, config={}){
     return apiClient.get(`/comments/${id}/audio/`, config)
   },
+  getSentiment(id, config={}){
+    return apiClient.get(`/comments/${id}/sentiment`, config)
+  }
 }

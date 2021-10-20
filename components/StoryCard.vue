@@ -6,9 +6,9 @@
   >
     <v-card-title>
       <div class='header overflow' style='width: 70%'>
-      <fa :icon="['far', 'user']" size='lg' />
+        <fa :icon="['far', 'user']" size='lg' />
         <span class='author'>{{ author }}</span>
-         : {{ capitalTitle }}
+        : {{ capitalTitle }}
       </div>
       <v-spacer></v-spacer>
       <span class=' count pr-4'>

@@ -15,5 +15,8 @@ export default {
   },
   deletePicture(id, config={}) {
     return apiClient.delete(`/pictures/${id}/`, config)
+  },
+  getComments(id, config={}){
+    return apiClient.get(`/pictures/${id}/comments`, config)
   }
 }
