@@ -30,17 +30,17 @@
             </template>
             <template v-else>
               <fa style='font-size: 18px;' :icon='$emoji(story.sentiment.sentiment.document.score)' />
-              <span class='detail-date pr-1'> {{ story.sentiment.sentiment.document.label.toLocaleUpperCase() }} </span>
-              <span class='detail-date pr-1'> {{ story.sentiment.language.toUpperCase() }} </span>
+              <span class='story-detail-info pr-1'> {{ story.sentiment.sentiment.document.label.toLocaleUpperCase() }} </span>
+              <span class='story-detail-info pr-1'> {{ story.sentiment.language.toUpperCase() }} </span>
             </template>
           </span>
           <div class='pr-3 pl-2'>
             <fa :icon="['far', 'comment']" />
-            <span class='detail-comments'>{{ story.comments.length }}</span>
+            <span class='story-detail-info'>{{ story.comments.length }}</span>
           </div>
           <div>
             <fa :icon="['far', 'calendar-alt']" />
-            <span class='detail-date'>{{ $getProperDate(story.created_at) }}</span>
+            <span class='story-detail-info'>{{ $getProperDate(story.created_at) }}</span>
           </div>
           <v-btn
             icon

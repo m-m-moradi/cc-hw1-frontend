@@ -5,9 +5,9 @@
     v-bind='$attrs'
   >
     <v-card-title>
-      <div class='header' style='width: 30%'>
+      <div class='comment-header' style='width: 30%'>
         <fa :icon="['far', 'user']" size='lg' />
-        <span class='author'>{{ author }}</span>
+        <span class='comment-author-name-tag'>{{ author }}</span>
       </div>
       <v-spacer></v-spacer>
       <span>
@@ -26,11 +26,12 @@
         </template>
         <template v-else>
           <fa style='font-size: 18px;' :icon='$emoji(sentiment.sentiment.document.score)' />
-          <span class='date pr-1'> {{ $capitalizeFirstLetter(sentiment.sentiment.document.label) }} </span>
-          <span class='date pr-1'> {{ sentiment.language.toUpperCase() }} </span>
+          <span class='comment-detail-info pr-1'> {{ $capitalizeFirstLetter(sentiment.sentiment.document.label)
+            }} </span>
+          <span class='comment-detail-info pr-1'> {{ sentiment.language.toUpperCase() }} </span>
         </template>
       </span>
-      <span class='date pl-2'>
+      <span class='comment-detail-info pl-2'>
         <fa :icon="['far', 'calendar-alt']" />
         {{ $getProperDate(date) }}
       </span>
@@ -48,7 +49,7 @@
         </v-btn>
       </span>
     </v-card-title>
-    <v-card-text class='pt-2 pb-3 text'>
+    <v-card-text class='pt-2 pb-3 comment-text'>
       {{ text }}
       <div v-if='audioSource'>
         <v-divider class='my-3'></v-divider>
@@ -148,35 +149,10 @@ export default {
       } else {
         this.audioSource = null
       }
-    },
+    }
   }
 }
 </script>
 
 <style scoped>
-
-.header {
-  font-family: 'Andada Pro', serif;
-  font-size: 18px;
-  font-weight: 900;
-}
-
-.text {
-  font-family: 'Andada Pro', serif;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.date {
-  font-family: 'Andada Pro', serif;
-  font-size: 15px;
-  font-weight: 700;
-}
-
-.author {
-  background-color: #c0392b;
-  padding: 3px 5px;
-  border-radius: 3px;
-  color: white;
-}
 </style>

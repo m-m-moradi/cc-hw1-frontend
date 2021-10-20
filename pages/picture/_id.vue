@@ -16,11 +16,11 @@
           <v-spacer></v-spacer>
           <div class='pr-5'>
             <fa :icon="['far', 'comment']" />
-            <span class='detail-comments'>{{ picture.comments.length }}</span>
+            <span class='image-detail-info'>{{ picture.comments.length }}</span>
           </div>
           <div>
             <fa :icon="['far', 'calendar-alt']" />
-            <span class='detail-date'>{{ $getProperDate(picture.created_at) }}</span>
+            <span class='image-detail-info'>{{ $getProperDate(picture.created_at) }}</span>
           </div>
         </div>
         <v-img :src='picture.image' style='border-radius: 3px'></v-img>

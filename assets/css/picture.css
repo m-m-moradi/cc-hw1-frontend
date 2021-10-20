@@ -1,0 +1,29 @@
+.uploader-name-title {
+  font-weight: 900;
+  font-size: 42px;
+}
+
+.image-title {
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.image-detail-info {
+  text-transform: unset !important;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.image-create-page-title {
+  font-weight: 800;
+  font-size: 30px;
+}
+
+.uploader-name-tag {
+  font-weight: 900;
+  font-size: 17px;
+  background-color: #16a085;
+  padding: 3px 5px;
+  border-radius: 3px;
+  color: white;
+}

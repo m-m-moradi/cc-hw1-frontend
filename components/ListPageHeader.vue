@@ -12,7 +12,7 @@
       <div style='height: 50px'></div>
       <div class='d-flex'>
         <div>
-          <h1 class='page_title'>{{ title }}</h1>
+          <h1 class='list-page-title'>{{ title }}</h1>
         </div>
         <v-spacer></v-spacer>
         <div>
@@ -60,5 +60,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

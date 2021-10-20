@@ -64,7 +64,6 @@ export default {
 </script>
 
 <style scoped>
-
 .header {
   font-family: 'Andada Pro', serif;
   font-size: 18px;
@@ -76,5 +75,4 @@ export default {
   font-size: 13px;
   font-weight: 700;
 }
-
 </style>

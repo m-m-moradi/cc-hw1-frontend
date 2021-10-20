@@ -11,7 +11,7 @@
       </v-btn>
       <v-card width='600' elevation='5'>
         <v-card-title class='px-10 pt-10'>
-          <span class='think mb-3'>Share with world what you think...</span>
+          <span class='story-create-page-title mb-3'>Share with world what you think...</span>
         </v-card-title>
         <v-card-text class='px-10'>
           <v-form ref='imageForm'>
@@ -139,22 +139,23 @@ export default {
 <style scoped>
 /* todo: why this styles can not be globalized? */
 /* todo: why this styles does not need important?*/
-.v-text-field >>> input {
-  font-size: 16px;
-  font-weight: 700;
+
+::v-deep .v-text-field input {
+  font-size: 16px !important;
+  font-weight: 700 !important;
 }
 
 ::v-deep .v-textarea textarea {
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 16px !important;
+  font-weight: 700 !important;
 }
 
-.v-text-field >>> label {
-  font-size: 16px;
-  font-weight: 700;
+::v-deep .v-text-field label {
+  font-size: 16px !important;
+  font-weight: 700 !important;
 }
 
-.v-text-field >>> .error--text {
-  font-weight: 700;
+::v-deep .v-text-field .error--text {
+  font-weight: 700 !important;
 }
 </style>

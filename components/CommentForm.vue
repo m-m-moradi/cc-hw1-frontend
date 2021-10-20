@@ -79,35 +79,25 @@ export default {
 </script>
 
 <style scoped>
+/* todo: why this styles can not be globalized? */
+/* todo: why this styles does not need important?*/
 
-.v-text-field >>> input {
-  font-family: 'Andada Pro', serif;
-  font-size: 16px;
-  font-weight: 700;
+::v-deep .v-text-field input {
+  font-size: 16px !important;
+  font-weight: 700 !important;
 }
 
 ::v-deep .v-textarea textarea {
-  font-family: 'Andada Pro', serif;
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 16px !important;
+  font-weight: 700 !important;
 }
 
-.v-text-field >>> label {
-  font-family: 'Andada Pro', serif;
-  font-size: 16px;
-  font-weight: 700;
+::v-deep .v-text-field label {
+  font-size: 16px !important;
+  font-weight: 700 !important;
 }
 
-.v-text-field >>> .error--text {
-  font-family: 'Andada Pro', serif;
-  font-weight: 700;
+::v-deep .v-text-field .error--text {
+  font-weight: 700 !important;
 }
-
-.button {
-  font-family: 'Andada Pro', serif;
-  text-transform: unset !important;
-  font-weight: 600;
-  font-size: 16px;
-}
-
 </style>

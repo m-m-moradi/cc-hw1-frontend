@@ -7,7 +7,7 @@
     <v-card-title>
       <div class='header overflow' style='width: 70%'>
         <fa :icon="['far', 'user']" size='lg' />
-        <span class='author'>{{ author }}</span>
+        <span class='author-name-tag'>{{ author }}</span>
         : {{ capitalTitle }}
       </div>
       <v-spacer></v-spacer>
@@ -61,21 +61,9 @@ export default {
 </script>
 
 <style scoped>
-.overflow {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .header {
   font-size: 18px;
   font-weight: 900;
-}
-
-.text {
-  font-family: 'Andada Pro', serif;
-  font-size: 14px;
-  font-weight: 500;
 }
 
 .count {
@@ -84,11 +72,15 @@ export default {
   font-weight: 700;
 }
 
-.author {
-  background-color: #2980b9;
-  padding: 3px 5px;
-  color: white;
-  border-radius: 3px;
+.overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
+.text {
+  font-family: 'Andada Pro', serif;
+  font-size: 14px;
+  font-weight: 500;
+}
 </style>

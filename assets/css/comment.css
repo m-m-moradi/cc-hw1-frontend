@@ -1,0 +1,20 @@
+.comment-header {
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.comment-text {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.comment-detail-info {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.comment-author-name-tag {
+  padding: 3px 5px;
+  border-radius: 3px;
+  color: white;
+}

@@ -1,0 +1,34 @@
+.author-name-title {
+  font-weight: 900;
+  font-size: 42px;
+}
+
+.story-title {
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.story-detail-info {
+  text-transform: unset !important;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.story-create-page-title {
+  font-weight: 800;
+  font-size: 30px;
+}
+
+.author-name-tag {
+  background-color: #2980b9;
+  padding: 3px 5px;
+  color: white;
+  border-radius: 3px;
+}
+
+.story-text{
+  font-weight: 600;
+  font-size: 16px;
+  text-align: justify;
+  text-justify: inter-word;
+}

@@ -9,8 +9,7 @@
   position: absolute !important;
 }
 
-/*List pages*/
-.page_title {
+.list-page-title {
   font-weight: 900;
   font-size: 42px;
 }
@@ -26,44 +25,17 @@
   font-size: 20px;
 }
 
-.uploader-name-tag {
-  font-weight: 900;
-  font-size: 17px;
-  background-color: #16a085;
-  padding: 3px 5px;
-  border-radius: 3px;
-  color: white;
-}
-
-/*Detail Pages*/
-.uploader-name-title, .author-name-title{
-  font-weight: 900;
-  font-size: 42px;
-}
-
-.detail-comments, .detail-date {
-  text-transform: unset !important;
-  font-weight: 600;
-  font-size: 16px;
-}
-
-.image-title, .story-title {
-  font-weight: 800;
-  font-size: 20px;
-}
-
-.story-text{
-  font-weight: 600;
-  font-size: 16px;
-  text-align: justify;
-  text-justify: inter-word;
-}
-
 .think {
   font-weight: 800;
   font-size: 30px;
 }
 
+
 .theme--light.v-btn.v-btn--icon {
     color: rgba(0, 0, 0, 1) !important;
 }
+
+.theme--light.v-card > .v-card__text, .theme--light.v-card > .v-card__subtitle {
+    color: rgba(0, 0, 0, 1) !important;
+}
+
