@@ -63,7 +63,7 @@
             </div>
             <div class='d-flex'>
               <v-spacer></v-spacer>
-              <v-btn class='button' @click='submitForm()'>
+              <v-btn class='button' :loading='submitLoading' @click='submitForm()'>
                 Submit
               </v-btn>
             </div>
@@ -91,10 +91,10 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 import { nameRules } from '@/validation/nameValidation'
 import { titleRules } from '@/validation/titleValidation'
 import { imageRules } from '@/validation/imageValidation'
-import pictureService from '@/services/pictureService'
 export default {
   name: 'PictureCreate',
   data() {
@@ -109,19 +109,15 @@ export default {
       imageRules
     }
   },
+  computed: {
+    ...mapState({
+      submitLoading: (state) => state.pictureStore.createPending
+    })
+  },
   methods: {
-    postPicture(data, config) {
-      this.submitLoading = true
-      return pictureService.createPicture(data, config)
-        .then(response => {
-          this.submitLoading = false
-          this.$router.push({ name: 'picture' })
-        }).catch(reason => {
-          this.submitLoading = false
-          this.snackbar = true
-          this.snackbarMessage = 'Sorry, there is problem. Please try again.'
-        })
-    },
+    ...mapActions({
+      createPicture: 'pictureStore/createPicture'
+    }),
     async submitForm() {
       if (this.$refs.imageForm.validate()) {
         const formData = new FormData()
@@ -131,7 +127,13 @@ export default {
         const config = {
           headers: { 'Content-Type': 'multipart/form-data' }
         }
-        await this.postPicture(formData, config)
+        await this.createPicture({ data: formData, config })
+          .then((response) => {
+            this.$router.push({ name: 'picture' })
+          }).catch(reason => {
+            this.snackbar = true
+            this.snackbarMessage = 'Sorry, there is problem. Please try again.'
+          })
       }
     }
   }

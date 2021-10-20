@@ -61,7 +61,7 @@
             </div>
             <div class='d-flex'>
               <v-spacer></v-spacer>
-              <v-btn class='button' @click='submitForm()'>
+              <v-btn class='button' :loading='submitLoading' @click='submitForm()'>
                 Submit
               </v-btn>
             </div>
@@ -89,10 +89,10 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 import { nameRules } from '@/validation/nameValidation'
 import { titleRules } from '@/validation/titleValidation'
 import { storyRules } from '@/validation/storyValidation'
-import storyService from '@/services/storyService'
 export default {
   name: 'ServiceCreate',
   data() {
@@ -107,19 +107,15 @@ export default {
       storyRules
     }
   },
+  computed: {
+    ...mapState({
+      submitLoading: (state) => state.storyStore.createPending
+    })
+  },
   methods: {
-    postStory(data, config) {
-      this.submitLoading = true
-      return storyService.createStory(data, config)
-        .then(response => {
-          this.submitLoading = false
-          this.$router.push({ name: 'story' })
-        }).catch(reason => {
-          this.submitLoading = false
-          this.snackbar = true
-          this.snackbarMessage = 'Sorry, there is problem. Please try again.'
-        })
-    },
+    ...mapActions({
+      createStory: 'storyStore/createStory'
+    }),
     async submitForm() {
       if (this.$refs.imageForm.validate()) {
         const data = {
@@ -127,7 +123,13 @@ export default {
           title: this.title,
           text: this.story
         }
-        await this.postStory(data, {})
+        await this.createStory({ data, config: {} })
+          .then((response) => {
+            this.$router.push({ name: 'story' })
+          }).catch((reason => {
+            this.snackbar = true
+            this.snackbarMessage = 'Sorry, there is problem. Please try again.'
+          }))
       }
     }
   }

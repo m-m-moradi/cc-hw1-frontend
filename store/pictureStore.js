@@ -29,7 +29,7 @@ export const mutations = {
     state.fetchCurrentPicturePending = status
   },
   SET_CREATE_PENDING(state, status) {
-    state.status = status
+    state.createPending = status
   },
 }
 
