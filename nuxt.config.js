@@ -80,6 +80,11 @@ export default {
     }
   },
 
+  publicRuntimeConfig: {
+    baseURL: process.env.BASE_URL || 'http://localhost:8000/bulletin/',
+  },
+
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
   googleFonts: {

@@ -59,8 +59,8 @@ export default {
 
   },
   async asyncData() {
-    const { data: storiesResponse } = await storyService.getStoriesCount()
-    const { data: picturesResponse } = await pictureService.getPicturesCount()
+    const { data: storiesResponse } = await storyService.getStoriesCount().catch(reason => alert(reason))
+    const { data: picturesResponse } = await pictureService.getPicturesCount().catch(reason => alert(reason))
     return {
       storiesCount: storiesResponse.count,
       picturesCount: picturesResponse.count
